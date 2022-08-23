@@ -4,7 +4,7 @@ pipeline
     agent any
     stages
     {
-        stage('ContDownload_master')
+        stage('ContDownload_Loan')
         {
             steps
             {
@@ -14,7 +14,7 @@ pipeline
                 }
             }
         }
-        stage('ContBuild_master')
+        stage('ContBuild_Loan')
         {
             steps
             {
@@ -25,37 +25,3 @@ pipeline
             }
     
         }
-        stage('ContDeployment_master')
-        {
-            steps
-            {
-                script
-                {
-                    cicd.Deploy("DeclarativePipelineWithSharedLibraries","172.31.31.174", "testingapp")
-                }
-            }
-        }
-        stage('ContTesting_master')
-        {
-            steps
-            {
-                script
-                {
-                    cicd.Git("https://github.com/intelliqittrainings/FunctionalTesting.git")
-                    cicd.Testing("DeclarativePipelineWithSharedLibraries")
-                }
-            }
-        }
-        stage('ContDelivery_master')
-        {
-            steps
-            {
-                script
-                {
-                    cicd.Deploy("DeclarativePipelineWithSharedLibraries","172.31.23.99", "prodapp")
-                }
-            }
-        }
-    }
-    
-}
